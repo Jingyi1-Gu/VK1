@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lipid 3D Visualization - GitHub Pages</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .best-coordinates {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+        }
+        .best-coordinates h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .coordinate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .coordinate-card {
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .coordinate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+        .coordinate-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .best-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .coordinate-desc {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        .open-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+        .open-btn:hover {
+            background: #2980b9;
+        }
+        .instructions {
+            background: #fff9e6;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .instructions h3 {
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .instructions li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ffeaa7;
+        }
+        .instructions li:last-child {
+            border-bottom: none;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        @media (max-width: 768px) {
+            .coordinate-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Lipid 3D Visualization</h1>
+            <p>Interactive 3D Van Krevelen Diagrams</p>
+        </div>
+        
+        <div class="content">
+            <div class="instructions">
+                <h3>🎯 How to Use</h3>
+                <ul>
+                    <li><strong>🖱️ Left-click + drag:</strong> Rotate the 3D view</li>
+                    <li><strong>🖱️ Right-click + drag:</strong> Pan the view</li>
+                    <li><strong>🖱️ Mouse wheel:</strong> Zoom in/out</li>
+                    <li><strong>📱 Touch devices:</strong> Use gestures to rotate and zoom</li>
+                    <li><strong>ℹ️ Hover over points:</strong> See detailed information</li>
+                    <li><strong>👆 Click legend items:</strong> Show/hide categories</li>
+                </ul>
+            </div>
+            <div class="best-coordinates">
+                <h3>🏆 Recommended Coordinate Systems</h3>
+                <div style="margin-bottom: 15px;">
+                    <h4>3D Best: H_minus_4_C_adjusted_vs_O_C_minus_3</h4>
+                    <p>Average Inter-class Distance: <strong>118.3919</strong></p>
+                    <p>OxPL Average Distance: <strong>249.5773</strong></p>
+                </div>
+                <div>
+                    <h4>2D Best: H_minus_4_C_adjusted_vs_O_C_minus_3</h4>
+                    <p>Average Inter-class Distance: <strong>0.177</strong></p>
+                    <p>OxPL Average Distance: <strong>0.2461</strong></p>
+                </div>
+            </div>
+            <h3 style="margin-bottom: 20px; color: #2c3e50;">📊 3D Interactive Plots</h3>
+            <div class="coordinate-grid">
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Generated on 2025-12-01 at 00:26:21</p>
+            <p>Powered by Plotly & GitHub Pages</p>
+        </div>
+    </div>
+    
+    <script>
+        // 添加简单的点击统计（可选）
+        document.querySelectorAll('.coordinate-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const plotName = this.querySelector('h4').textContent.trim();
+                console.log('Opening plot:', plotName);
+            });
+        });
+    </script>
+</body>
+</html>
